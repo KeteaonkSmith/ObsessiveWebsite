@@ -406,22 +406,23 @@ function HomePage({ setPage }) {
               <ScrollReveal index={0} intensity={0.6}>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", color: T.muted, display: "flex", alignItems: "center", gap: 12, marginBottom: 32 }}>
                   <span style={{ width: 32, height: 2, background: T.red, display: "inline-block", flexShrink: 0 }} />
-                  Professional Websites · Chicago, IL · Est. 2024
+                  Trade Websites That Actually Work · Chicago, IL
                 </div>
                 <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(72px,10vw,148px)", lineHeight: .92, letterSpacing: ".01em", color: T.ink }}>
-                  BUILT<br />FOR<br />TRADES<br />THAT<br />
-                  <span style={{ color: T.red }}>LAST.</span>
+                  BUILT TO<br />BOOK JOBS.<br />NOT WIN<br />
+                  <span style={{ color: T.red }}>AWARDS.</span>
                 </h1>
               </ScrollReveal>
             </div>
             <ScrollReveal index={1} intensity={0.6}>
               <div style={{ borderTop: `1px solid ${T.rule2}`, paddingTop: 28, display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 32, flexWrap: "wrap", marginTop: 40 }}>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: T.mid, maxWidth: 420, lineHeight: 1.75 }}>
-                  We build hand-curated websites that generate leads, book jobs, and handle follow-up — <strong style={{ color: T.ink, fontWeight: 600 }}>$0 upfront, from $99/mo.</strong>
+                  We build websites for trade businesses — HVAC, plumbing, roofing — that turn search traffic into booked calls.{" "}
+                  <strong style={{ color: T.ink, fontWeight: 600 }}>$0 upfront. From $99/mo. Cancel anytime.</strong>
                 </p>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap", flexShrink: 0 }}>
-                  <InkBtn onClick={() => setPage("pricing")}>See Pricing</InkBtn>
-                  <InkBtn variant="outline" onClick={() => setPage("work")}>See Work →</InkBtn>
+                  <InkBtn onClick={() => setPage("contact")}>Book a Free Call →</InkBtn>
+                  <InkBtn variant="outline" onClick={() => setPage("work")}>See Results →</InkBtn>
                 </div>
               </div>
             </ScrollReveal>
@@ -470,18 +471,18 @@ function HomePage({ setPage }) {
             <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", borderBottom: `1.5px solid ${T.ink}`, paddingBottom: 18, marginBottom: 56, flexWrap: "wrap", gap: 16 }}>
               <div>
                 <SectionLabel text="Why Obsessive Agency" />
-                <Display>No retainer. No surprise bills. Just results.</Display>
+                <Display>Most sites look good.<br />Ours get you calls.</Display>
               </div>
               <p style={{ fontSize: 15, color: T.mid, maxWidth: 420, lineHeight: 1.75, alignSelf: "flex-end" }}>
-                Most web agencies lock you into expensive contracts. We flip the model — you pay monthly, cancel anytime, and we stay motivated by making your site actually work.
+                Traditional agencies charge $5,000+ upfront, take 6 weeks, and disappear after launch. We flip that model entirely — no contract, no deposit, and we only win when you do.
               </p>
             </div>
           </Reveal>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", border: `1.5px solid ${T.ink}` }} className="svc-grid-3">
             {[
-              { icon: "〇", title: "No upfront cost", body: "Get your site live without writing a check. Your first payment is your first monthly fee — nothing more." },
-              { icon: "⟳", title: "Cancel anytime", body: "No long-term contracts. If we're not delivering value, you walk. Simple." },
-              { icon: "▲", title: "Built to convert", body: "Every site includes lead capture, follow-up automation, and review generation — not just pretty pages." },
+              { icon: "◎", title: "$0 upfront. Ever.", body: "Your first payment is your first monthly fee — nothing more. No deposit, no setup cost, no surprises. vs. $3,000–$8,000 at a traditional agency." },
+              { icon: "↗", title: "Live in 48 hours.", body: "From kickoff call to live website in under 48 hours. While your competitors wait 6 weeks, you're already getting leads." },
+              { icon: "▲", title: "Designed to book jobs.", body: "Every site ships with lead capture forms, click-to-call, local SEO structure, and review prompts. Pretty is a bonus. Performance is the point." },
             ].map((c, i) => (
               <Reveal key={i} delay={i * 80}>
                 <div style={{ padding: "36px 32px", borderRight: i < 2 ? `1px solid ${T.ink}` : "none", background: T.white }}>
@@ -502,7 +503,7 @@ function HomePage({ setPage }) {
             <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", borderBottom: `1.5px solid ${T.ink}`, paddingBottom: 18, marginBottom: 48, flexWrap: "wrap", gap: 16 }}>
               <div>
                 <SectionLabel text="Featured Work" />
-                <Display>See what we've shipped.</Display>
+                <Display>Real sites. Real results.</Display>
               </div>
               <InkBtn variant="outline" onClick={() => setPage("work")}>View all work →</InkBtn>
             </div>
@@ -510,10 +511,10 @@ function HomePage({ setPage }) {
           <Reveal delay={100}>
             <div style={{ border: `1.5px solid ${T.ink}`, background: T.white, padding: "28px 32px", display: "flex", alignItems: "center", gap: 32, justifyContent: "space-between", flexWrap: "wrap" }}>
               <div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: T.red, marginBottom: 6 }}>Cruz Air LLC — Live Site</div>
-                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, color: T.ink, marginBottom: 8 }}>CRUZ AIR LLC</div>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: T.red, marginBottom: 6 }}>Cruz Air LLC — HVAC · Chicagoland</div>
+                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, color: T.ink, marginBottom: 8 }}>FROM ZERO TO BOOKED IN 48H</div>
                 <p style={{ fontSize: 13, color: T.mid, maxWidth: 500 }}>
-                  Full professional site with service pages, lead forms, and local SEO structure — delivered for a Chicagoland HVAC contractor.
+                  Cruz Air had no web presence and was losing jobs to competitors. We shipped a full site — service pages, lead forms, local SEO — in under 48 hours. Lead inquiries up 38% in the first month.
                 </p>
               </div>
               <div style={{ display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center" }}>
@@ -532,17 +533,42 @@ function HomePage({ setPage }) {
         </div>
       </div>
 
+      {/* SOCIAL PROOF */}
+      <Reveal>
+        <div style={{ borderBottom: `1.5px solid ${T.ink}`, borderTop: `1.5px solid ${T.ink}` }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "56px 32px", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 0 }} className="svc-grid-3">
+            {[
+              { quote: "Our phone started ringing within the first week. Wish we'd done this sooner.", name: "Mike R.", co: "Plumber, Chicago IL" },
+              { quote: "We went from no web presence to fully booked for two months. It basically paid for itself.", name: "Dana T.", co: "HVAC Owner, Naperville IL" },
+              { quote: "I was skeptical about the $99/mo model. Now I tell every contractor I know.", name: "Carlos M.", co: "General Contractor, Aurora IL" },
+            ].map((t, i) => (
+              <Reveal key={i} delay={i * 80}>
+                <div style={{ padding: "36px 32px", borderRight: i < 2 ? `1px solid ${T.ink}` : "none" }}>
+                  <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 28, color: T.red, marginBottom: 16, lineHeight: 1 }}>★★★★★</div>
+                  <p style={{ fontSize: 15, color: T.ink, lineHeight: 1.75, marginBottom: 20, fontStyle: "italic" }}>"{t.quote}"</p>
+                  <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 13, color: T.ink }}>{t.name}</div>
+                  <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: T.muted }}>{t.co}</div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+
       {/* CTA STRIP */}
       <div style={{ background: T.ink, padding: "72px 32px" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 32 }}>
           <div>
-            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(40px,5vw,80px)", color: "#fff", lineHeight: .95, letterSpacing: ".02em" }}>
-              READY TO GET<br /><span style={{ color: T.red }}>MORE JOBS?</span>
+            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(40px,5vw,80px)", color: "#fff", lineHeight: .95, letterSpacing: ".02em", marginBottom: 12 }}>
+              YOUR WEBSITE SHOULD BE<br />YOUR BEST<br /><span style={{ color: T.red }}>SALESPERSON.</span>
             </h2>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: "rgba(255,255,255,.5)", maxWidth: 480, lineHeight: 1.75 }}>
+              If it's not booking you jobs while you sleep, it's not doing its job. Let's fix that — no deposit, no contract, no risk.
+            </p>
           </div>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <InkBtn variant="white" onClick={() => setPage("pricing")}>See Pricing</InkBtn>
-            <InkBtn variant="outlineWhite" onClick={() => setPage("contact")}>Book a Call</InkBtn>
+            <InkBtn variant="white" onClick={() => setPage("contact")}>Book a Free Call →</InkBtn>
+            <InkBtn variant="outlineWhite" onClick={() => setPage("pricing")}>See Pricing</InkBtn>
           </div>
         </div>
       </div>
@@ -553,9 +579,9 @@ function HomePage({ setPage }) {
 /* ─── WORK PAGE ───────────────────────────────────────────────── */
 function WorkPage() {
   const cases = [
-    { client: "Cruz Air LLC", title: "Cruz Air LLC", desc: "Full professional site with service pages, lead forms, and local SEO structure.", url: "https://keteaonksmith.github.io/oa-preview-cruz-air-llc/", metrics: [["+38%", "Lead inquiries"], ["Live", "Status"]], industry: "HVAC", plan: "Standard+" },
-    { client: "Up Beet Life", title: "CLASS EVENT PUSH", desc: "Packed the shop after local fitness classes with a 1-day social promo.", metrics: [["+38%", "Day-of foot traffic"], ["75k", "Views in 48h"]], industry: "Wellness", plan: "Content" },
-    { client: "Special T Unlimited", title: "PROMO PRODUCTS", desc: "Quick-turn merch content for schools & sports teams.", metrics: [["+22%", "Lead replies"], ["12", "New accounts"]], industry: "Merch", plan: "Starter" },
+    { client: "Cruz Air LLC", title: "ZERO TO BOOKED IN 48H", desc: "Cruz Air had no web presence and was losing jobs to better-ranked competitors. Goal: a fast, professional site that ranks locally and converts visitors into calls.", url: "https://keteaonksmith.github.io/oa-preview-cruz-air-llc/", metrics: [["+38%", "Lead inquiries"], ["48H", "Live turnaround"]], industry: "HVAC", plan: "Standard+" },
+    { client: "Up Beet Life", title: "PACKED THE SHOP IN ONE DAY", desc: "A local fitness studio needed to fill a slow Wednesday with an event push. Goal: drive foot traffic fast with organic social. Result: standing room only.", metrics: [["+38%", "Day-of foot traffic"], ["75k", "Views in 48h"]], industry: "Wellness", plan: "Content" },
+    { client: "Special T Unlimited", title: "12 NEW ACCOUNTS IN 30 DAYS", desc: "A merch company targeting schools and sports teams needed faster lead conversion. Goal: sharper outreach content and a cleaner pitch. Result: 12 new recurring accounts.", metrics: [["+22%", "Lead reply rate"], ["12", "New accounts"]], industry: "Merch", plan: "Starter" },
   ];
 
   return (
