@@ -28,28 +28,66 @@ const GLOBAL_CSS = `
       linear-gradient(#e2e0da 1px, transparent 1px),
       linear-gradient(90deg, #e2e0da 1px, transparent 1px);
     background-size: 56px 56px;
+    /* --grid-offset updated by useScrollShift hook */
+    background-position: var(--grid-offset, 0px) var(--grid-offset, 0px);
+    transition: background-position 0.05s linear;
   }
 
   /* Ticker */
   @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   .ticker-anim { animation: ticker 34s linear infinite; }
 
-  /* Reveal */
-  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+  /* Reveal — upgraded easing + scale for premium feel */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+    transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0) scale(1); }
+
+  /* Hero entrance — staged, fast, controlled */
+  @keyframes heroFadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .hero-animate {
+    animation: heroFadeUp 0.48s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* Nav scroll state */
+  .nav-scrolled {
+    background: rgba(255,255,255,0.9) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+  }
+
+  /* Reduced motion — disable everything */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .hero-animate {
+      transition: none !important;
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
 
   /* Page transitions */
   .page-enter { opacity: 0; transform: translateY(10px); }
   .page-active { opacity: 1; transform: translateY(0); transition: opacity .35s ease, transform .35s ease; }
 
-  /* Hover states */
-  .work-card:hover { background: #f7f6f3 !important; }
+  /* Hover states — added translateY lift for tactile feel */
+  .work-card { transition: background .15s, transform .2s cubic-bezier(0.22,1,0.36,1); }
+  .work-card:hover { background: #f7f6f3 !important; transform: translateY(-4px); }
   .work-card:hover .card-bar { transform: scaleX(1) !important; }
-  .svc-card:hover { background: #f5dada !important; }
+  .svc-card { transition: background .15s, transform .2s cubic-bezier(0.22,1,0.36,1); }
+  .svc-card:hover { background: #f5dada !important; transform: translateY(-4px); }
   .svc-card:hover .svc-big-num { color: #d42b2b !important; }
   .proc-row:hover { background: #f7f6f3 !important; }
   .proc-row:hover .proc-num { color: #d42b2b !important; }
-  .plan-card:hover { border-color: #d42b2b !important; }
+  .plan-card { transition: border-color .15s, transform .2s cubic-bezier(0.22,1,0.36,1); }
+  .plan-card:hover { border-color: #d42b2b !important; transform: translateY(-4px); }
   .plan-card:hover .plan-cta { background: #d42b2b !important; color: #fff !important; }
   .nav-link:hover { color: #111010 !important; background: #f7f6f3 !important; }
   .trade-row:hover { background: #f7f6f3 !important; color: #111010 !important; }
@@ -90,6 +128,25 @@ function sanitize(str) {
 // Validate email format before any submission
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+/* ─── SCROLL SHIFT HOOK ──────────────────────────────────────── */
+// Updates --grid-offset CSS variable on scroll — drives subtle grid parallax
+function useScrollShift() {
+  useEffect(() => {
+    let rafId;
+    const onScroll = () => {
+      rafId = requestAnimationFrame(() => {
+        const offset = (window.scrollY * 0.15).toFixed(2);
+        document.documentElement.style.setProperty('--grid-offset', `${offset}px`);
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
 }
 
 /* ─── REUSABLE COMPONENTS ────────────────────────────────────── */
@@ -187,6 +244,12 @@ function Reveal({ children, delay = 0, style = {} }) {
 
 /* ─── NAV ─────────────────────────────────────────────────────── */
 function Nav({ page, setPage }) {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
   const links = [
     { label: "Home", key: "home" },
     { label: "Work", key: "work" },
@@ -197,8 +260,11 @@ function Nav({ page, setPage }) {
   return (
     <nav style={{
       position: "sticky", top: 0, zIndex: 100,
-      background: T.white,
+      background: scrolled ? "rgba(255,255,255,0.9)" : T.white,
+      backdropFilter: scrolled ? "blur(10px)" : "none",
+      WebkitBackdropFilter: scrolled ? "blur(10px)" : "none",
       borderBottom: `1.5px solid ${T.ink}`,
+      transition: "background 0.2s ease, backdrop-filter 0.2s ease",
     }}>
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         {/* Logo */}
@@ -259,6 +325,7 @@ function Nav({ page, setPage }) {
 
 /* ─── HOME PAGE ───────────────────────────────────────────────── */
 function HomePage({ setPage }) {
+  useScrollShift(); // drives subtle grid background parallax on scroll
   const trades = ["Plumbing & HVAC", "Electrical", "Roofing", "Landscaping", "General Contracting", "Painting & Finishing"];
 
   return (
@@ -269,16 +336,16 @@ function HomePage({ setPage }) {
           {/* Left */}
           <div style={{ borderRight: `1.5px solid ${T.ink}`, padding: "72px 56px 72px 0", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
             <div>
-              <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", color: T.muted, display: "flex", alignItems: "center", gap: 12, marginBottom: 32 }}>
+              <div className="hero-animate" style={{ animationDelay: "0ms", fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", color: T.muted, display: "flex", alignItems: "center", gap: 12, marginBottom: 32 }}>
                 <span style={{ width: 32, height: 2, background: T.red, display: "inline-block", flexShrink: 0 }} />
                 Professional Websites · Chicago, IL · Est. 2024
               </div>
-              <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(72px,10vw,148px)", lineHeight: .92, letterSpacing: ".01em", color: T.ink }}>
+              <h1 className="hero-animate" style={{ animationDelay: "80ms", fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(72px,10vw,148px)", lineHeight: .92, letterSpacing: ".01em", color: T.ink }}>
                 BUILT<br />FOR<br />TRADES<br />THAT<br />
                 <span style={{ color: T.red }}>LAST.</span>
               </h1>
             </div>
-            <div style={{ borderTop: `1px solid ${T.rule2}`, paddingTop: 28, display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 32, flexWrap: "wrap", marginTop: 40 }}>
+            <div className="hero-animate" style={{ animationDelay: "200ms", borderTop: `1px solid ${T.rule2}`, paddingTop: 28, display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 32, flexWrap: "wrap", marginTop: 40 }}>
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: T.mid, maxWidth: 420, lineHeight: 1.75 }}>
                 We build hand-curated websites that generate leads, book jobs, and handle follow-up — <strong style={{ color: T.ink, fontWeight: 600 }}>$0 upfront, from $99/mo.</strong>
               </p>
@@ -341,7 +408,7 @@ function HomePage({ setPage }) {
           </Reveal>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", border: `1.5px solid ${T.ink}` }} className="svc-grid-3">
             {[
-              { icon: "◎", title: "No upfront cost", body: "Get your site live without writing a check. Your first payment is your first monthly fee — nothing more." },
+              { icon: "〇", title: "No upfront cost", body: "Get your site live without writing a check. Your first payment is your first monthly fee — nothing more." },
               { icon: "⟳", title: "Cancel anytime", body: "No long-term contracts. If we're not delivering value, you walk. Simple." },
               { icon: "▲", title: "Built to convert", body: "Every site includes lead capture, follow-up automation, and review generation — not just pretty pages." },
             ].map((c, i) => (
