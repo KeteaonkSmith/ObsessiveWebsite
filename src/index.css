@@ -95,6 +95,8 @@ button { font-family: inherit; }
   .work-grid-3   { grid-template-columns: 1fr 1fr !important; }
   .svc-grid-3    { grid-template-columns: 1fr 1fr !important; }
   .why-grid-3    { grid-template-columns: 1fr 1fr !important; }
+  .why-grid-3 > *:first-child { grid-column: 1 / -1; }
+  .why-card-first { border-right: none !important; }
   .founders-grid { grid-template-columns: 1fr 1fr !important; }
   .principles-grid { grid-template-columns: 1fr 1fr !important; }
 }

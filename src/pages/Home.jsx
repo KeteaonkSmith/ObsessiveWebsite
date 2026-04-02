@@ -151,7 +151,7 @@ export default function HomePage({ setPage }) {
               { icon: '▲', title: 'Built to Book Jobs',  body: 'Every site includes lead capture, AI follow-up, and review automation — not just a pretty page that sits there doing nothing.' },
             ].map((c, i) => (
               <Reveal key={i} delay={i * 80}>
-                <div className="why-card" style={{
+                <div className={`why-card${i === 0 ? ' why-card-first' : ''}`} style={{
                   padding: '36px 32px',
                   borderRight: i < 2 ? `1px solid ${T.ink}` : 'none',
                   background: T.white, transition: 'background .15s', height: '100%',
