@@ -38,7 +38,8 @@ export default function HomePage({ setPage }) {
             display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
           }}>
             <div>
-              <div style={{
+              <div className="hero-animate" style={{
+                animationDelay: '0ms',
                 fontFamily: "'Instrument Sans', sans-serif", fontWeight: 700,
                 fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase',
                 color: T.muted, display: 'flex', alignItems: 'center', gap: 12, marginBottom: 32,
@@ -46,7 +47,8 @@ export default function HomePage({ setPage }) {
                 <span style={{ width: 32, height: 2, background: T.red, display: 'inline-block', flexShrink: 0 }} />
                 Professional Websites · Chicago, IL · Est. 2024
               </div>
-              <h1 style={{
+              <h1 className="hero-animate" style={{
+                animationDelay: '80ms',
                 fontFamily: "'Bebas Neue', sans-serif",
                 fontSize: 'clamp(72px,10vw,148px)',
                 lineHeight: .92, letterSpacing: '.01em', color: T.ink,
@@ -74,7 +76,8 @@ export default function HomePage({ setPage }) {
               ))}
             </div>
 
-            <div style={{
+            <div className="hero-animate" style={{
+              animationDelay: '200ms',
               borderTop: `1px solid ${T.rule2}`, paddingTop: 28,
               display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between',
               gap: 32, flexWrap: 'wrap', marginTop: 40,
@@ -91,7 +94,7 @@ export default function HomePage({ setPage }) {
           </div>
 
           {/* Right sidebar — desktop only */}
-          <div className="hero-sidebar" style={{ padding: '72px 0 72px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div className="hero-sidebar hero-animate" style={{ animationDelay: '300ms', padding: '72px 0 72px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
               <div style={{ fontFamily: "'Instrument Sans', sans-serif", fontWeight: 700, fontSize: 10, letterSpacing: '.18em', textTransform: 'uppercase', color: T.muted, marginBottom: 14 }}>
                 Industries we serve
@@ -134,7 +137,7 @@ export default function HomePage({ setPage }) {
       <div style={{ borderBottom: `1.5px solid ${T.ink}` }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '80px 32px' }}>
           <Reveal>
-            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', borderBottom: `1.5px solid ${T.ink}`, paddingBottom: 18, marginBottom: 56, flexWrap: 'wrap', gap: 16 }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', paddingBottom: 18, marginBottom: 56, flexWrap: 'wrap', gap: 16, position: 'relative' }}>
               <div>
                 <SectionLabel text="Why Obsessive Agency" />
                 <Display>No retainer. No fluff.<br />Just more jobs.</Display>
@@ -142,6 +145,7 @@ export default function HomePage({ setPage }) {
               <p style={{ fontSize: 15, color: T.mid, maxWidth: 400, lineHeight: 1.75, alignSelf: 'flex-end' }}>
                 Most web agencies lock you into expensive contracts and disappear. We flip the model — pay monthly, cancel anytime, get results.
               </p>
+              <Reveal variant="line-reveal" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '1.5px', background: T.ink }} />
             </div>
           </Reveal>
           <div className="why-grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', border: `1.5px solid ${T.ink}` }}>
@@ -156,7 +160,7 @@ export default function HomePage({ setPage }) {
                   borderRight: i < 2 ? `1px solid ${T.ink}` : 'none',
                   background: T.white, transition: 'background .15s', height: '100%',
                 }}>
-                  <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, color: T.rule2, marginBottom: 16 }}>{c.icon}</div>
+                  <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, color: T.red, marginBottom: 16 }}>{c.icon}</div>
                   <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 26, letterSpacing: '.02em', color: T.ink, marginBottom: 10 }}>{c.title}</div>
                   <p style={{ fontSize: 14, color: T.mid, lineHeight: 1.75 }}>{c.body}</p>
                 </div>
@@ -170,12 +174,13 @@ export default function HomePage({ setPage }) {
       <div style={{ background: T.off, borderBottom: `1.5px solid ${T.ink}` }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '80px 32px' }}>
           <Reveal>
-            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', borderBottom: `1.5px solid ${T.ink}`, paddingBottom: 18, marginBottom: 48, flexWrap: 'wrap', gap: 16 }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', paddingBottom: 18, marginBottom: 48, flexWrap: 'wrap', gap: 16, position: 'relative' }}>
               <div>
                 <SectionLabel text="Featured Work" />
                 <Display>See what we ship.</Display>
               </div>
               <InkBtn variant="outline" onClick={() => setPage('work')}>View all work →</InkBtn>
+              <Reveal variant="line-reveal" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '1.5px', background: T.ink }} />
             </div>
           </Reveal>
           <Reveal delay={100}>

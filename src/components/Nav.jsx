@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { T } from '../tokens.js'
 
 const LINKS = [
@@ -11,6 +11,13 @@ const LINKS = [
 
 export default function Nav({ page, setPage }) {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const navigate = (key) => {
     setPage(key)
@@ -18,7 +25,14 @@ export default function Nav({ page, setPage }) {
   }
 
   return (
-    <nav style={{ position: 'sticky', top: 0, zIndex: 200, background: T.white, borderBottom: `1.5px solid ${T.ink}` }}>
+    <nav style={{
+      position: 'sticky', top: 0, zIndex: 200,
+      background: scrolled ? 'rgba(255,255,255,0.92)' : T.white,
+      backdropFilter: scrolled ? 'blur(12px)' : 'none',
+      WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
+      borderBottom: `1.5px solid ${T.ink}`,
+      transition: 'background 0.3s ease, backdrop-filter 0.3s ease',
+    }}>
       <div style={{
         maxWidth: 1280, margin: '0 auto',
         padding: '0 32px', height: 60,

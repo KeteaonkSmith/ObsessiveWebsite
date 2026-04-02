@@ -48,13 +48,13 @@ export function InkBtn({ children, onClick, href, variant = 'primary', style = {
   const combined = { ...base, ...variants[variant] }
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" style={combined}>
+      <a href={href} target="_blank" rel="noopener noreferrer" className="ink-btn" style={combined}>
         {children}
       </a>
     )
   }
   return (
-    <button onClick={onClick} disabled={disabled} style={combined}>
+    <button onClick={onClick} disabled={disabled} className="ink-btn" style={combined}>
       {children}
     </button>
   )
@@ -108,23 +108,56 @@ export function Ticker() {
   )
 }
 
-/* Scroll-reveal wrapper */
-export function Reveal({ children, delay = 0, style = {} }) {
+/* Scroll-reveal wrapper
+   Props:
+   - delay: ms offset before animation starts (manual stagger)
+   - variant: 'fade-up' | 'fade-in' | 'scale-in' | 'clip-reveal' | 'line-reveal'
+   - stagger: auto-staggers direct children at 90ms intervals
+*/
+export function Reveal({ children, delay = 0, style = {}, variant = 'fade-up', stagger = false }) {
   const ref = useRef(null)
   useEffect(() => {
     const el = ref.current
     if (!el) return
+
+    if (stagger) {
+      // Observe wrapper; on intersect, stagger-reveal each direct child
+      const kids = Array.from(el.children)
+      kids.forEach(child => child.classList.add('reveal'))
+      const obs = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          kids.forEach((child, i) => {
+            child.style.transitionDelay = `${i * 90}ms`
+            child.classList.add('visible')
+          })
+          obs.unobserve(el)
+        }
+      }, { threshold: 0.07 })
+      obs.observe(el)
+      return () => obs.disconnect()
+    }
+
     const obs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        el.classList.add('visible')
-        obs.unobserve(el)
-      }
+      if (entry.isIntersecting) { el.classList.add('visible'); obs.unobserve(el) }
     }, { threshold: 0.07 })
     obs.observe(el)
     return () => obs.disconnect()
-  }, [])
+  }, [stagger])
+
+  if (stagger) {
+    return (
+      <div ref={ref} style={style}>
+        {children}
+      </div>
+    )
+  }
   return (
-    <div ref={ref} className="reveal" style={{ transitionDelay: `${delay}ms`, ...style }}>
+    <div
+      ref={ref}
+      className="reveal"
+      data-anim={variant}
+      style={{ transitionDelay: delay ? `${delay}ms` : undefined, ...style }}
+    >
       {children}
     </div>
   )
