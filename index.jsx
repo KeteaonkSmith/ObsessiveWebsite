@@ -312,7 +312,7 @@ function HomePage({ setPage }) {
               <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 10, letterSpacing: ".18em", textTransform: "uppercase", color: T.muted, marginBottom: 12 }}>
                 At a glance
               </div>
-              {[["$0", "Upfront cost"], ["$99", "Starting / month"], ["48H", "Avg. turnaround"]].map(([val, lbl], i) => (
+              {[["$0", "Upfront cost"], ["$99", "Starting / month"], ["24H", "Avg. turnaround"]].map(([val, lbl], i) => (
                 <div key={i} className="hero-stat" style={{ background: T.off, border: `1px solid ${T.rule}`, padding: "14px 16px", marginBottom: 1, transition: "background .15s", cursor: "default" }}>
                   <strong style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 40, color: T.ink, display: "block", lineHeight: 1 }}>{val}</strong>
                   <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 500, fontSize: 11, letterSpacing: ".08em", textTransform: "uppercase", color: T.muted }}>{lbl}</span>
@@ -741,7 +741,7 @@ function AboutPage({ setPage }) {
               </Reveal>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-              {[["3+", "Years in market"], ["$0", "Upfront, always"], ["48H", "Avg. go-live time"], ["100%", "Trade-focused"]].map(([v, l], i) => (
+              {[["3+", "Years in market"], ["$0", "Upfront, always"], ["24H", "Avg. go-live time"], ["100%", "Trade-focused"]].map(([v, l], i) => (
                 <div key={i} style={{ padding: "32px 28px", borderBottom: i < 2 ? `1px solid ${T.rule2}` : "none", borderRight: i % 2 === 0 ? `1px solid ${T.rule2}` : "none" }}>
                   <strong style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 52, color: T.ink, display: "block", lineHeight: 1 }}>{v}</strong>
                   <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 500, fontSize: 11, color: T.muted, letterSpacing: ".08em", textTransform: "uppercase" }}>{l}</span>
