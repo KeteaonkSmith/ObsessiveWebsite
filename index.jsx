@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 
 /* ─── DESIGN TOKENS ──────────────────────────────────────────── */
 const T = {
@@ -37,15 +37,8 @@ const GLOBAL_CSS = `
   @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   .ticker-anim { animation: ticker 34s linear infinite; }
 
-  /* Reveal — upgraded easing + scale for premium feel */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px) scale(0.98);
-    transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: transform, opacity;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0) scale(1); }
+  /* Reveal is scroll-driven via JS (ScrollReveal component) — class is now a no-op */
+  .reveal { will-change: transform, opacity; }
 
   /* Hero entrance — staged, fast, controlled */
   @keyframes heroFadeUp {
@@ -222,24 +215,98 @@ function Ticker() {
   );
 }
 
-/* ─── REVEAL HOOK ────────────────────────────────────────────── */
-function useReveal() {
-  const ref = useRef(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { el.classList.add("visible"); obs.unobserve(el); }
-    }, { threshold: 0.07 });
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-  return ref;
+/* ─── SCROLL PROGRESS SYSTEM ─────────────────────────────────
+ *
+ * Architecture: module-level registry + rAF loop.
+ * Styles are applied directly to DOM nodes — zero React re-renders.
+ *
+ * Progress formula per element:
+ *   raw = (vh - rect.top) / (vh + rect.height)  → 0 when below fold, 1 when above
+ *   p   = clamp(raw - index * 0.05, 0, 1)       → stagger by index
+ *
+ * Opacity: bell curve — fades in, holds, fades out
+ *   opacity = clamp(p*3, 0,1) * clamp((1-p)*3, 0,1)
+ *   (peaks at 1.0 in the middle third of travel)
+ *
+ * Transform: translateY 30→0→-30 + scale 0.96→1→0.96
+ * ─────────────────────────────────────────────────────────── */
+let _srIdCounter = 0;
+const _srRegistry = new Map(); // id → { el, index, intensity }
+let _srRafId = null;
+
+// Detect reduced-motion preference once at load
+const _srReduced =
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function _srTick() {
+  if (_srRegistry.size === 0) { _srRafId = null; return; }
+  const vh = window.innerHeight;
+
+  // ── Read phase (batch getBoundingClientRect — no interleaved writes) ──
+  const batch = [];
+  for (const [, entry] of _srRegistry) {
+    if (!entry.el) continue;
+    batch.push({ el: entry.el, rect: entry.el.getBoundingClientRect(), idx: entry.index, int: entry.intensity });
+  }
+
+  // ── Write phase ──
+  for (const { el, rect, idx, int } of batch) {
+    if (_srReduced) {
+      el.style.opacity = "1";
+      el.style.transform = "none";
+      continue;
+    }
+    const raw = (vh - rect.top) / (vh + rect.height);
+    const p   = Math.max(0, Math.min(1, raw - idx * 0.05)); // stagger
+
+    // Bell-curve opacity: fade in → hold (full opacity) → fade out
+    const opacity = Math.min(p * 3, 1) * Math.min((1 - p) * 3, 1);
+    // Gentle vertical drift: 30px below → 0 → -30px above
+    const ty = (1 - p * 2) * 30 * int;
+    // Subtle scale: 0.96 → 1.00 → 0.96
+    const sc = 1 - 0.04 * Math.abs(p * 2 - 1) * int;
+
+    el.style.opacity      = opacity.toFixed(3);
+    el.style.transform    = `translateY(${ty.toFixed(1)}px) scale(${sc.toFixed(4)})`;
+  }
+
+  _srRafId = requestAnimationFrame(_srTick);
 }
 
+function _srRegister(el, index, intensity) {
+  const id = ++_srIdCounter;
+  _srRegistry.set(id, { el, index, intensity });
+  if (!_srRafId) _srRafId = requestAnimationFrame(_srTick);
+  return id;
+}
+
+/* ScrollReveal — scroll-progress-driven reveal component
+   Props:
+   - index     : stagger order (0, 1, 2…) — later items appear slightly after
+   - intensity : motion strength multiplier (default 1, use 0.5 for subtler)
+   - style     : passed through to wrapper div
+*/
+function ScrollReveal({ children, index = 0, intensity = 1, style = {} }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const id = _srRegister(ref.current, index, intensity);
+    return () => { _srRegistry.delete(id); };
+  }, [index, intensity]);
+
+  return (
+    <div ref={ref} style={{ opacity: 0, willChange: "transform, opacity", ...style }}>
+      {children}
+    </div>
+  );
+}
+
+/* Reveal — backwards-compatible shim around ScrollReveal
+   Existing <Reveal delay={i*80}> usage maps delay → stagger index
+*/
 function Reveal({ children, delay = 0, style = {} }) {
-  const ref = useReveal();
-  return <div ref={ref} className="reveal" style={{ transitionDelay: `${delay}ms`, ...style }}>{children}</div>;
+  const index = Math.round(delay / 80);
+  return <ScrollReveal index={index} style={style}>{children}</ScrollReveal>;
 }
 
 /* ─── NAV ─────────────────────────────────────────────────────── */
@@ -336,24 +403,28 @@ function HomePage({ setPage }) {
           {/* Left */}
           <div style={{ borderRight: `1.5px solid ${T.ink}`, padding: "72px 56px 72px 0", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
             <div>
-              <div className="hero-animate" style={{ animationDelay: "0ms", fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", color: T.muted, display: "flex", alignItems: "center", gap: 12, marginBottom: 32 }}>
-                <span style={{ width: 32, height: 2, background: T.red, display: "inline-block", flexShrink: 0 }} />
-                Professional Websites · Chicago, IL · Est. 2024
-              </div>
-              <h1 className="hero-animate" style={{ animationDelay: "80ms", fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(72px,10vw,148px)", lineHeight: .92, letterSpacing: ".01em", color: T.ink }}>
-                BUILT<br />FOR<br />TRADES<br />THAT<br />
-                <span style={{ color: T.red }}>LAST.</span>
-              </h1>
+              <ScrollReveal index={0} intensity={0.6}>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", color: T.muted, display: "flex", alignItems: "center", gap: 12, marginBottom: 32 }}>
+                  <span style={{ width: 32, height: 2, background: T.red, display: "inline-block", flexShrink: 0 }} />
+                  Professional Websites · Chicago, IL · Est. 2024
+                </div>
+                <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(72px,10vw,148px)", lineHeight: .92, letterSpacing: ".01em", color: T.ink }}>
+                  BUILT<br />FOR<br />TRADES<br />THAT<br />
+                  <span style={{ color: T.red }}>LAST.</span>
+                </h1>
+              </ScrollReveal>
             </div>
-            <div className="hero-animate" style={{ animationDelay: "200ms", borderTop: `1px solid ${T.rule2}`, paddingTop: 28, display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 32, flexWrap: "wrap", marginTop: 40 }}>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: T.mid, maxWidth: 420, lineHeight: 1.75 }}>
-                We build hand-curated websites that generate leads, book jobs, and handle follow-up — <strong style={{ color: T.ink, fontWeight: 600 }}>$0 upfront, from $99/mo.</strong>
-              </p>
-              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", flexShrink: 0 }}>
-                <InkBtn onClick={() => setPage("pricing")}>See Pricing</InkBtn>
-                <InkBtn variant="outline" onClick={() => setPage("work")}>See Work →</InkBtn>
+            <ScrollReveal index={1} intensity={0.6}>
+              <div style={{ borderTop: `1px solid ${T.rule2}`, paddingTop: 28, display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 32, flexWrap: "wrap", marginTop: 40 }}>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: T.mid, maxWidth: 420, lineHeight: 1.75 }}>
+                  We build hand-curated websites that generate leads, book jobs, and handle follow-up — <strong style={{ color: T.ink, fontWeight: 600 }}>$0 upfront, from $99/mo.</strong>
+                </p>
+                <div style={{ display: "flex", gap: 12, flexWrap: "wrap", flexShrink: 0 }}>
+                  <InkBtn onClick={() => setPage("pricing")}>See Pricing</InkBtn>
+                  <InkBtn variant="outline" onClick={() => setPage("work")}>See Work →</InkBtn>
+                </div>
               </div>
-            </div>
+            </ScrollReveal>
           </div>
 
           {/* Right sidebar */}
