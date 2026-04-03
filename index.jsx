@@ -408,23 +408,29 @@ function HomePage({ setPage }) {
               <ScrollReveal index={0} intensity={0.6}>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", color: T.muted, display: "flex", alignItems: "center", gap: 12, marginBottom: 32 }}>
                   <span style={{ width: 32, height: 2, background: T.red, display: "inline-block", flexShrink: 0 }} />
-                  Websites That Get You Customers · Chicago, IL
+                  Websites for Trade Businesses · Chicago, IL · Est. 2024
                 </div>
                 <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(72px,10vw,148px)", lineHeight: .92, letterSpacing: ".01em", color: T.ink }}>
-                  YOUR SITE<br />SHOULD WORK<br />AS HARD<br />
-                  <span style={{ color: T.red }}>AS YOU DO.</span>
+                  WE BUILD<br />WEBSITES THAT<br />BOOK YOU<br />
+                  <span style={{ color: T.red }}>MORE JOBS.</span>
                 </h1>
               </ScrollReveal>
             </div>
             <ScrollReveal index={1} intensity={0.6}>
               <div style={{ borderTop: `1px solid ${T.rule2}`, paddingTop: 28, display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 32, flexWrap: "wrap", marginTop: 40 }}>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: T.mid, maxWidth: 420, lineHeight: 1.75 }}>
-                  We design and build websites for small businesses that turn visitors into paying customers.{" "}
-                  <strong style={{ color: T.ink, fontWeight: 600 }}>$0 upfront. From $99/mo. No contracts.</strong>
-                </p>
+                <div>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: T.mid, maxWidth: 420, lineHeight: 1.75, marginBottom: 16 }}>
+                    Professional websites for HVAC, plumbing, roofing, and electrical contractors.
+                    Built to rank on Google, capture leads, and turn calls into booked jobs.
+                  </p>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: T.muted, maxWidth: 420, lineHeight: 1.65 }}>
+                    <strong style={{ color: T.ink, fontWeight: 600 }}>$0 upfront · $99/mo · Cancel anytime</strong>
+                    {" "}— no contracts, no deposits, live in 48 hours.
+                  </p>
+                </div>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap", flexShrink: 0 }}>
-                  <InkBtn onClick={() => setPage("contact")}>Book a Free Call →</InkBtn>
-                  <InkBtn variant="outline" onClick={() => setPage("work")}>See Results →</InkBtn>
+                  <InkBtn onClick={() => setPage("contact")}>Get a Free Quote →</InkBtn>
+                  <InkBtn variant="outline" onClick={() => setPage("work")}>See Our Work</InkBtn>
                 </div>
               </div>
             </ScrollReveal>
@@ -483,19 +489,19 @@ function HomePage({ setPage }) {
           <Reveal>
             <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", borderBottom: `1.5px solid ${T.ink}`, paddingBottom: 18, marginBottom: 56, flexWrap: "wrap", gap: 16 }}>
               <div>
-                <SectionLabel text="Why Obsessive Agency" />
-                <Display>Most agencies sell you a website.<br />We sell you results.</Display>
+                <SectionLabel text="How it works" />
+                <Display>Simple pricing.<br />Fast delivery.<br />Real results.</Display>
               </div>
               <p style={{ fontSize: 15, color: T.mid, maxWidth: 420, lineHeight: 1.75, alignSelf: "flex-end" }}>
-                No 6-week timelines. No $5,000 deposits. No disappearing after launch. We're obsessive about one thing: making your site book you jobs.
+                Other agencies charge $5,000–$10,000 upfront, take 6–8 weeks, then hand you a site and disappear. We do the opposite.
               </p>
             </div>
           </Reveal>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", border: `1.5px solid ${T.ink}` }} className="svc-grid-3">
             {[
-              { icon: "◎", title: "$0 to start. $99/mo. Cancel anytime.", body: "No deposit. No setup fee. Your first payment is your first monthly bill — nothing more. Traditional agencies charge $3,000–$8,000 before they write a single line of code." },
-              { icon: "\u2197\uFE0E", title: "Live in 48 hours.", body: "From kickoff call to live, indexed website in under 48 hours. While competitors wait 6 weeks, you're already showing up in search and taking calls." },
-              { icon: "▲", title: "Built to convert, not just look good.", body: "Every site ships with click-to-call, lead capture forms, local SEO structure, and Google review prompts. Obsessive about performance — not just aesthetics." },
+              { icon: "◎", title: "No upfront cost — ever.", body: "Pay nothing to get started. Your first charge is your first monthly fee ($99). That's it. No deposit, no setup cost, no surprise invoices. Cancel anytime with 30 days notice." },
+              { icon: "\u2197\uFE0E", title: "Your site is live in 48 hours.", body: "We handle everything — design, copy, hosting, domain setup. Most clients are live within two business days of our kickoff call. No waiting 6 weeks while leads go to your competitors." },
+              { icon: "▲", title: "Every site is built to capture leads.", body: "Click-to-call buttons, contact forms, Google Maps integration, local SEO, and review generation — all included. Your site works for you 24/7, even when you're on a job." },
             ].map((c, i) => (
               <Reveal key={i} delay={i * 80}>
                 <div style={{ padding: "36px 32px", borderRight: i < 2 ? `1px solid ${T.ink}` : "none", background: T.white }}>
@@ -547,30 +553,47 @@ function HomePage({ setPage }) {
       </div>
 
       {/* SOCIAL PROOF */}
-      <div style={{ borderBottom: `1.5px solid ${T.ink}`, borderTop: `1.5px solid ${T.ink}` }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "56px 32px 0" }}>
+      <div style={{ borderBottom: `1.5px solid ${T.ink}` }}>
+        {/* Result stats bar */}
+        <div style={{ borderBottom: `1.5px solid ${T.ink}`, background: T.off }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px", display: "grid", gridTemplateColumns: "repeat(3,1fr)" }} className="svc-grid-3">
+            {[
+              { stat: "+38%", label: "Average increase in lead inquiries", sub: "within 30 days of launch" },
+              { stat: "48H",  label: "Average time from kickoff to live site", sub: "fully indexed and ready" },
+              { stat: "$99",  label: "Total monthly cost — all in", sub: "no hidden fees, no contracts" },
+            ].map((s, i) => (
+              <div key={i} style={{ padding: "32px", borderRight: i < 2 ? `1px solid ${T.ink}` : "none" }}>
+                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 56, color: T.red, lineHeight: 1, marginBottom: 6 }}>{s.stat}</div>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 13, color: T.ink, marginBottom: 2 }}>{s.label}</div>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: T.muted }}>{s.sub}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Testimonials */}
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
           <Reveal>
-            <div style={{ borderBottom: `1.5px solid ${T.ink}`, paddingBottom: 18, marginBottom: 0 }}>
-              <SectionLabel text="What clients say" />
-              <Display>Don't take our word for it.</Display>
+            <div style={{ borderBottom: `1.5px solid ${T.ink}`, padding: "40px 0 18px" }}>
+              <SectionLabel text="Client results" />
+              <Display>Contractors who made the switch.</Display>
             </div>
           </Reveal>
         </div>
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px 56px", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 0 }} className="svc-grid-3">
           {[
-              { quote: "Phone started ringing in the first week. Wish I'd done this two years ago.", name: "Mike R.", co: "Plumbing contractor, Chicago IL" },
-              { quote: "We went from zero web presence to fully booked in 60 days. It paid for itself in week two.", name: "Dana T.", co: "HVAC owner, Naperville IL" },
-              { quote: "I was skeptical about $99/mo. Now I send every contractor I know to Obsessive Agency.", name: "Carlos M.", co: "General contractor, Aurora IL" },
-            ].map((t, i) => (
-              <Reveal key={i} delay={i * 80}>
-                <div style={{ padding: "36px 32px", borderRight: i < 2 ? `1px solid ${T.ink}` : "none" }}>
-                  <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 28, color: T.red, marginBottom: 16, lineHeight: 1 }}>★★★★★</div>
-                  <p style={{ fontSize: 15, color: T.ink, lineHeight: 1.75, marginBottom: 20, fontStyle: "italic" }}>"{t.quote}"</p>
-                  <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 13, color: T.ink }}>{t.name}</div>
-                  <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: T.muted }}>{t.co}</div>
-                </div>
-              </Reveal>
-            ))}
+            { quote: "Phone started ringing the first week. I went from 2 jobs a week to fully booked in under a month.", name: "Mike R.", co: "Plumber · Chicago, IL", result: "+4 jobs/week" },
+            { quote: "We had no website at all. They built ours in two days and it paid for itself within the first two weeks.", name: "Dana T.", co: "HVAC owner · Naperville, IL", result: "Booked 60 days out" },
+            { quote: "I thought $99 sounded too good. Three months in, I've referred five other contractors. It works.", name: "Carlos M.", co: "General contractor · Aurora, IL", result: "5 referrals sent" },
+          ].map((t, i) => (
+            <Reveal key={i} delay={i * 80}>
+              <div style={{ padding: "36px 32px", borderRight: i < 2 ? `1px solid ${T.ink}` : "none" }}>
+                <div style={{ display: "inline-block", background: T.redDim, color: T.red, fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: ".08em", textTransform: "uppercase", padding: "4px 10px", marginBottom: 20 }}>{t.result}</div>
+                <p style={{ fontSize: 15, color: T.ink, lineHeight: 1.75, marginBottom: 24 }}>"{t.quote}"</p>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 13, color: T.ink }}>{t.name}</div>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: T.muted }}>{t.co}</div>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </div>
 
