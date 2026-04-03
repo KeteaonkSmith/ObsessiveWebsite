@@ -194,7 +194,7 @@ export default function HomePage({ setPage }) {
             <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', paddingBottom: 18, marginBottom: 48, flexWrap: 'wrap', gap: 16, position: 'relative' }}>
               <div>
                 <SectionLabel text="Featured Work" />
-                <Display>See what we ship.</Display>
+                <Display>See how we deliver.</Display>
               </div>
               <InkBtn variant="outline" onClick={() => setPage('work')}>View all work →</InkBtn>
               <Reveal variant="line-reveal" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '1.5px', background: T.ink }} />
