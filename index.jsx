@@ -411,8 +411,8 @@ function HomePage({ setPage }) {
                   Websites for Trade Businesses · Chicago, IL · Est. 2024
                 </div>
                 <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(72px,10vw,148px)", lineHeight: .92, letterSpacing: ".01em", color: T.ink }}>
-                  WE BUILD<br />WEBSITES THAT<br />BOOK YOU<br />
-                  <span style={{ color: T.red }}>MORE JOBS.</span>
+                  YOUR NEXT<br />CUSTOMER<br />IS SEARCHING<br />
+                  <span style={{ color: T.red }}>RIGHT NOW.</span>
                 </h1>
               </ScrollReveal>
             </div>
