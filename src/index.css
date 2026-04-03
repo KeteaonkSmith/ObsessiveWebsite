@@ -99,8 +99,8 @@ button { font-family: inherit; }
 .work-card:hover .card-bar { transform: scaleX(1) !important; }
 .svc-card:hover   { background: #f5dada !important; }
 .svc-card:hover .svc-big-num { color: #d42b2b !important; }
-.why-card { transition: background .15s, transform .2s cubic-bezier(0.16,1,0.3,1); }
-.why-card:hover   { background: #f7f6f3 !important; transform: translateY(-3px); }
+.why-card { transition: background .35s cubic-bezier(0.16,1,0.3,1); }
+.why-card:hover   { background: #f0efe9 !important; }
 .proc-row:hover   { background: #f7f6f3 !important; }
 .proc-row:hover .proc-num { color: #d42b2b !important; }
 .plan-card:hover  { border-color: #d42b2b !important; }

@@ -53,8 +53,8 @@ export default function HomePage({ setPage }) {
                 fontSize: 'clamp(72px,10vw,148px)',
                 lineHeight: .92, letterSpacing: '.01em', color: T.ink,
               }}>
-                WE BUILD<br />WEBSITES THAT<br />BOOK YOU<br />
-                <span style={{ color: T.red }}>MORE JOBS.</span>
+                YOUR NEXT<br />CUSTOMER<br />IS SEARCHING<br />
+                <span style={{ color: T.red }}>RIGHT NOW.</span>
               </h1>
             </div>
 
@@ -139,6 +139,17 @@ export default function HomePage({ setPage }) {
 
       <Ticker />
 
+      {/* ── PROBLEM STATEMENT ────────────────── */}
+      <div style={{ background: T.ink, padding: '48px 32px', borderBottom: `1.5px solid ${T.ink}` }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 24 }}>
+          <p style={{ fontSize: 'clamp(17px,2vw,22px)', color: 'rgba(255,255,255,.85)', lineHeight: 1.7, maxWidth: 680 }}>
+            Most websites look good. Very few actually convert.{' '}
+            <span style={{ color: T.red, fontWeight: 600 }}>If your site isn't generating customers, it's not doing its job.</span>
+          </p>
+          <InkBtn variant="white" onClick={() => setPage('contact')}>Fix My Site →</InkBtn>
+        </div>
+      </div>
+
       {/* ── WHY OA ───────────────────────────── */}
       <div style={{ borderBottom: `1.5px solid ${T.ink}` }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '80px 32px' }}>
@@ -164,7 +175,7 @@ export default function HomePage({ setPage }) {
                 <div className={`why-card${i === 0 ? ' why-card-first' : ''}`} style={{
                   padding: '36px 32px',
                   borderRight: i < 2 ? `1px solid ${T.ink}` : 'none',
-                  background: T.white, transition: 'background .15s', height: '100%',
+                  background: T.white, height: '100%',
                 }}>
                   <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, color: T.red, marginBottom: 16 }}>{c.icon}</div>
                   <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 26, letterSpacing: '.02em', color: T.ink, marginBottom: 10 }}>{c.title}</div>
