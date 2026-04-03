@@ -204,7 +204,7 @@ export default function HomePage({ setPage }) {
             <div style={{ border: `1.5px solid ${T.ink}`, background: T.white, padding: '28px 32px', display: 'flex', alignItems: 'center', gap: 32, justifyContent: 'space-between', flexWrap: 'wrap' }}>
               <div>
                 <div style={{ fontFamily: "'Instrument Sans', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: '.12em', textTransform: 'uppercase', color: T.red, marginBottom: 6 }}>Cruz Air LLC — Live Site</div>
-                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, color: T.ink, marginBottom: 8 }}>CHICAGO HVAC WEBSITE</div>
+                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, color: T.ink, marginBottom: 8 }}>CRUZ AIR LLC</div>
                 <p style={{ fontSize: 13, color: T.mid, maxWidth: 500 }}>
                   Full professional site with service pages, lead forms, and local SEO structure — delivered for a Chicagoland HVAC contractor.
                 </p>
