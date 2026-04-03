@@ -68,7 +68,7 @@ export default function HomePage({ setPage }) {
                 margin: '32px 0',
               }}
             >
-              {[['$0','Upfront'], ['$99','/ month'], ['48H','Go-live']].map(([val, lbl], i) => (
+              {[['$0','Upfront'], ['$99','/ month'], ['24H','Go-live']].map(([val, lbl], i) => (
                 <div key={i} style={{ background: T.off, padding: '14px 16px' }}>
                   <strong style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 36, color: T.ink, display: 'block', lineHeight: 1 }}>{val}</strong>
                   <span style={{ fontFamily: "'Instrument Sans', sans-serif", fontWeight: 600, fontSize: 10, letterSpacing: '.08em', textTransform: 'uppercase', color: T.muted }}>{lbl}</span>
@@ -89,7 +89,7 @@ export default function HomePage({ setPage }) {
                 </p>
                 <p style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: 13, color: T.muted, maxWidth: 420, lineHeight: 1.65 }}>
                   <strong style={{ color: T.ink, fontWeight: 700 }}>$0 upfront · $99/mo · Cancel anytime</strong>
-                  {' '}— no contracts, no deposits, live in 48 hours.
+                  {' '}— no contracts, no deposits, live in 24 hours.
                 </p>
               </div>
               <div className="hero-cta-row" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', flexShrink: 0 }}>
@@ -122,7 +122,7 @@ export default function HomePage({ setPage }) {
               <div style={{ fontFamily: "'Instrument Sans', sans-serif", fontWeight: 700, fontSize: 10, letterSpacing: '.18em', textTransform: 'uppercase', color: T.muted, marginBottom: 12 }}>
                 At a glance
               </div>
-              {[['$0','Upfront cost'], ['$99','Starting / month'], ['48H','Avg. go-live time']].map(([val, lbl], i) => (
+              {[['$0','Upfront cost'], ['$99','Starting / month'], ['24H','Avg. go-live time']].map(([val, lbl], i) => (
                 <div key={i} className="hero-stat" style={{
                   background: T.off, border: `1px solid ${T.rule}`,
                   padding: '14px 16px', marginBottom: 1,
@@ -168,7 +168,7 @@ export default function HomePage({ setPage }) {
           <div className="why-grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', border: `1.5px solid ${T.ink}` }}>
             {[
               { icon: '◎', title: 'No upfront cost — ever.', body: 'Pay nothing to get started. Your first charge is your first monthly fee ($99). No deposit, no setup cost, no surprise invoices. Cancel anytime with 30 days notice.' },
-              { icon: '↗', title: 'Your site is live in 48 hours.', body: 'We handle everything — design, copy, hosting, domain setup. Most clients are live within two business days of our kickoff call. No waiting 6 weeks while leads go elsewhere.' },
+              { icon: '↗', title: 'Your site is live in 24 hours.', body: 'We handle everything — design, copy, hosting, domain setup. Most clients are live within two business days of our kickoff call. No waiting 6 weeks while leads go elsewhere.' },
               { icon: '▲', title: 'Every site is built to capture leads.', body: 'Click-to-call, contact forms, Google Maps, local SEO, and review generation — all included. Your site works for you 24/7, even when you\'re on a job.' },
             ].map((c, i) => (
               <Reveal key={i} delay={i * 80}>
@@ -230,7 +230,7 @@ export default function HomePage({ setPage }) {
           <div className="why-grid-3" style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px', display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' }}>
             {[
               { stat: '+38%', label: 'Average increase in lead inquiries', sub: 'within 30 days of launch' },
-              { stat: '48H',  label: 'Average time from call to live site', sub: 'fully indexed and ready' },
+              { stat: '24H',  label: 'Average time from call to live site', sub: 'fully indexed and ready' },
               { stat: '$99',  label: 'Total monthly cost — all in', sub: 'no hidden fees, no contracts' },
             ].map((s, i) => (
               <div key={i} style={{ padding: '32px', borderRight: i < 2 ? `1px solid ${T.ink}` : 'none' }}>

@@ -42,13 +42,13 @@ export default function WorkPage({ setPage }) {
                   <Tag>Standard+</Tag>
                   <Tag>Live</Tag>
                 </div>
-                <div style={{ fontFamily: "'Instrument Sans', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: '.12em', textTransform: 'uppercase', color: T.red, marginBottom: 8 }}>Cruz Air LLC</div>
-                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(32px,4vw,52px)', color: T.ink, lineHeight: .95, marginBottom: 20 }}>CHICAGO HVAC<br />WEBSITE</div>
+                <div style={{ fontFamily: "'Instrument Sans', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: '.12em', textTransform: 'uppercase', color: T.red, marginBottom: 8 }}>Local HVAC Contractor</div>
+                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(32px,4vw,52px)', color: T.ink, lineHeight: .95, marginBottom: 20 }}>CRUZ AIR LLC<br /></div>
                 <p style={{ fontSize: 14, color: T.mid, lineHeight: 1.85, marginBottom: 28, maxWidth: 440 }}>
-                  A full professional site for a Chicagoland HVAC contractor — service pages, lead capture forms, Google Business setup, and local SEO structure. Built and launched within 48 hours of kickoff.
+                  A full professional site for a Chicagoland HVAC contractor — service pages, lead capture forms, Google Business setup, and local SEO structure. Built and launched within 24 hours of kickoff.
                 </p>
                 <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 32 }}>
-                  {[['Live','Status'], ['HVAC','Industry'], ['Standard+','Plan'], ['48H','Delivered']].map(([v,l]) => (
+                  {[['Live','Status'], ['HVAC','Industry'], ['Standard+','Plan'], ['24H','Delivered']].map(([v,l]) => (
                     <div key={l} style={{ background: T.off, border: `1px solid ${T.rule2}`, padding: '10px 14px' }}>
                       <strong style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 22, color: T.ink, display: 'block', lineHeight: 1 }}>{v}</strong>
                       <span style={{ fontFamily: "'Instrument Sans', sans-serif", fontWeight: 600, fontSize: 10, color: T.muted, letterSpacing: '.06em', textTransform: 'uppercase' }}>{l}</span>
@@ -131,7 +131,7 @@ export default function WorkPage({ setPage }) {
                 </div>
                 <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 36, color: T.ink, marginBottom: 8 }}>YOUR BUSINESS HERE.</div>
                 <p style={{ fontSize: 14, color: T.mid, maxWidth: 460, lineHeight: 1.75 }}>
-                  We're building case studies as we grow. Be our next featured client — get a professional site live in 48 hours with $0 upfront.
+                  We're building case studies as we grow. Be our next featured client — get a professional site live in 24 hours with $0 upfront.
                 </p>
               </div>
               <InkBtn onClick={() => setPage('contact')}>Claim a Spot →</InkBtn>

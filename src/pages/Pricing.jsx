@@ -21,7 +21,7 @@ const PLANS = [
     ],
     notIncluded: [
       'Monthly analytics reports',
-      'AI follow-up sequences',
+      'Automated follow-up sequences',
       'Review generation automation',
     ],
     cta: 'Start with Starter',
@@ -54,7 +54,7 @@ const FAQS = [
   ['Can I cancel at any time?', 'Yes. No cancellation fees, no notice period. Just let us know and we\'ll stop billing immediately.'],
   ['What\'s in the monthly analytics report?', 'Standard+ clients receive a monthly PDF covering site traffic, lead form submissions, conversion rates, and local SEO keyword rankings.'],
   ['Do I own my site?', 'While you\'re a client, we host and maintain the site. If you cancel, we can transfer your files — we\'ll never hold your content hostage.'],
-  ['How long does it take to go live?', 'Most sites are live within 48–72 hours of our kickoff call.'],
+  ['How long does it take to go live?', 'Most sites are live within 24 hours or less after purchase. We handle everything — design, copy, hosting, domain setup. No waiting weeks for your site to launch.'],
   ['What if I need changes?', 'Starter gets minor updates included. Standard+ gets unlimited content updates and priority support.'],
 ]
 
@@ -99,9 +99,9 @@ export default function PricingPage({ setPage }) {
                 <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 56, color: '#fff', lineHeight: 1, marginBottom: 8 }}>$0 Upfront</div>
                 <div style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: 13, color: 'rgba(255,255,255,.8)', lineHeight: 1.8 }}>
                   From $99/mo total — no surprises<br />
-                  + 48-hour go-live<br />
+                  + 24-hour go-live<br />
                   + Cancel anytime<br />
-                  + AI follow-up included<br />
+                  + Automated follow-up included<br />
                   + You get our full attention
                 </div>
               </div>
