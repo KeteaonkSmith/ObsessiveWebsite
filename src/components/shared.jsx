@@ -35,7 +35,6 @@ export function InkBtn({ children, onClick, href, variant = 'primary', style = {
     padding: '13px 26px', display: 'inline-block',
     cursor: disabled ? 'not-allowed' : 'pointer',
     border: 'none',
-    transition: 'background .15s, color .15s, transform .1s',
     opacity: disabled ? 0.6 : 1,
     ...style,
   }

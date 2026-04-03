@@ -15,11 +15,11 @@ const PLANS = [
       'Google Business profile setup',
       'Basic local SEO structure',
       'Contact page + service summary',
+      'Multi-page site structure',
       'Free setup — $0 upfront',
       'Cancel anytime',
     ],
     notIncluded: [
-      'Multi-page site structure',
       'Monthly analytics reports',
       'AI follow-up sequences',
       'Review generation automation',
@@ -134,6 +134,7 @@ export default function PricingPage({ setPage }) {
                 border: plan.highlight ? `3px solid ${T.red}` : '1px solid transparent',
                 transition: 'border-color .2s',
                 position: 'relative', height: '100%',
+                display: 'flex', flexDirection: 'column',
               }}>
                 {plan.highlight && (
                   <div style={{
@@ -173,6 +174,7 @@ export default function PricingPage({ setPage }) {
                   onClick={() => setPage('contact')}
                   style={{
                     width: '100%',
+                    marginTop: 'auto',
                     fontFamily: "'Instrument Sans', sans-serif", fontWeight: 700,
                     fontSize: 13, letterSpacing: '.1em', textTransform: 'uppercase',
                     padding: 16,
