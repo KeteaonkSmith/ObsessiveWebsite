@@ -512,7 +512,7 @@ function HomePage({ setPage }) {
             <div style={{ border: `1.5px solid ${T.ink}`, background: T.white, padding: "28px 32px", display: "flex", alignItems: "center", gap: 32, justifyContent: "space-between", flexWrap: "wrap" }}>
               <div>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: T.red, marginBottom: 6 }}>Cruz Air LLC — HVAC · Chicagoland</div>
-                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, color: T.ink, marginBottom: 8 }}>FROM ZERO TO BOOKED IN 48H</div>
+                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, color: T.ink, marginBottom: 8 }}>FROM ZERO TO BOOKED IN 24H</div>
                 <p style={{ fontSize: 13, color: T.mid, maxWidth: 500 }}>
                   Cruz Air had no web presence and was losing jobs to competitors. We shipped a full site — service pages, lead forms, local SEO — in under 48 hours. Lead inquiries up 38% in the first month.
                 </p>
@@ -579,8 +579,8 @@ function HomePage({ setPage }) {
 /* ─── WORK PAGE ───────────────────────────────────────────────── */
 function WorkPage() {
   const cases = [
-    { client: "Cruz Air LLC", title: "ZERO TO BOOKED IN 48H", desc: "Cruz Air had no web presence and was losing jobs to better-ranked competitors. Goal: a fast, professional site that ranks locally and converts visitors into calls.", url: "https://keteaonksmith.github.io/oa-preview-cruz-air-llc/", metrics: [["+38%", "Lead inquiries"], ["48H", "Live turnaround"]], industry: "HVAC", plan: "Standard+" },
-    { client: "Up Beet Life", title: "PACKED THE SHOP IN ONE DAY", desc: "A local fitness studio needed to fill a slow Wednesday with an event push. Goal: drive foot traffic fast with organic social. Result: standing room only.", metrics: [["+38%", "Day-of foot traffic"], ["75k", "Views in 48h"]], industry: "Wellness", plan: "Content" },
+    { client: "Cruz Air LLC", title: "ZERO TO BOOKED IN 24H", desc: "Cruz Air had no web presence and was losing jobs to better-ranked competitors. Goal: a fast, professional site that ranks locally and converts visitors into calls.", url: "https://keteaonksmith.github.io/oa-preview-cruz-air-llc/", metrics: [["+38%", "Lead inquiries"], ["24H", "Live turnaround"]], industry: "HVAC", plan: "Standard+" },
+    { client: "Up Beet Life", title: "PACKED THE SHOP IN ONE DAY", desc: "A local fitness studio needed to fill a slow Wednesday with an event push. Goal: drive foot traffic fast with organic social. Result: standing room only.", metrics: [["+38%", "Day-of foot traffic"], ["75k", "Views in 24h"]], industry: "Wellness", plan: "Content" },
     { client: "Special T Unlimited", title: "12 NEW ACCOUNTS IN 30 DAYS", desc: "A merch company targeting schools and sports teams needed faster lead conversion. Goal: sharper outreach content and a cleaner pitch. Result: 12 new recurring accounts.", metrics: [["+22%", "Lead reply rate"], ["12", "New accounts"]], industry: "Merch", plan: "Starter" },
   ];
 
