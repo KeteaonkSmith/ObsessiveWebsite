@@ -93,6 +93,8 @@ const GLOBAL_CSS = `
   @media(max-width:640px) {
     .nav-desktop { display: none !important; }
     .hero-sidebar { display: none !important; }
+    .hero-grid { grid-template-columns: 1fr !important; }
+    .hero-left { border-right: none !important; padding-right: 0 !important; }
     .work-grid-3 { grid-template-columns: 1fr !important; }
     .svc-grid-3 { grid-template-columns: 1fr !important; }
     .about-grid { grid-template-columns: 1fr !important; }
@@ -399,26 +401,26 @@ function HomePage({ setPage }) {
     <div className="page-enter page-active">
       {/* HERO */}
       <div className="grid-bg" style={{ borderBottom: `1.5px solid ${T.ink}`, position: "relative", overflow: "hidden" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px", display: "grid", gridTemplateColumns: "1fr 360px", minHeight: "calc(100vh - 60px)", position: "relative", zIndex: 1 }}>
+        <div className="hero-grid" style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px", display: "grid", gridTemplateColumns: "1fr 360px", minHeight: "calc(100vh - 60px)", position: "relative", zIndex: 1 }}>
           {/* Left */}
-          <div style={{ borderRight: `1.5px solid ${T.ink}`, padding: "72px 56px 72px 0", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+          <div className="hero-left" style={{ borderRight: `1.5px solid ${T.ink}`, padding: "72px 56px 72px 0", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
             <div>
               <ScrollReveal index={0} intensity={0.6}>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", color: T.muted, display: "flex", alignItems: "center", gap: 12, marginBottom: 32 }}>
                   <span style={{ width: 32, height: 2, background: T.red, display: "inline-block", flexShrink: 0 }} />
-                  Trade Websites That Actually Work · Chicago, IL
+                  Websites That Get You Customers · Chicago, IL
                 </div>
                 <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(72px,10vw,148px)", lineHeight: .92, letterSpacing: ".01em", color: T.ink }}>
-                  BUILT TO<br />BOOK JOBS.<br />NOT WIN<br />
-                  <span style={{ color: T.red }}>AWARDS.</span>
+                  YOUR SITE<br />SHOULD WORK<br />AS HARD<br />
+                  <span style={{ color: T.red }}>AS YOU DO.</span>
                 </h1>
               </ScrollReveal>
             </div>
             <ScrollReveal index={1} intensity={0.6}>
               <div style={{ borderTop: `1px solid ${T.rule2}`, paddingTop: 28, display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 32, flexWrap: "wrap", marginTop: 40 }}>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: T.mid, maxWidth: 420, lineHeight: 1.75 }}>
-                  We build websites for trade businesses — HVAC, plumbing, roofing — that turn search traffic into booked calls.{" "}
-                  <strong style={{ color: T.ink, fontWeight: 600 }}>$0 upfront. From $99/mo. Cancel anytime.</strong>
+                  We design and build websites for small businesses that turn visitors into paying customers.{" "}
+                  <strong style={{ color: T.ink, fontWeight: 600 }}>$0 upfront. From $99/mo. No contracts.</strong>
                 </p>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap", flexShrink: 0 }}>
                   <InkBtn onClick={() => setPage("contact")}>Book a Free Call →</InkBtn>
@@ -429,7 +431,7 @@ function HomePage({ setPage }) {
           </div>
 
           {/* Right sidebar */}
-          <div className="hero-sidebar" style={{ padding: "72px 0 72px 40px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+          <div className="hero-sidebar" style={{ padding: "72px 0 72px 40px", display: "flex", flexDirection: "column", justifyContent: "flex-start", gap: 32 }}>
             <div>
               <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 10, letterSpacing: ".18em", textTransform: "uppercase", color: T.muted, marginBottom: 14 }}>
                 Industries we serve
@@ -464,6 +466,17 @@ function HomePage({ setPage }) {
 
       <Ticker />
 
+      {/* PROBLEM STATEMENT */}
+      <div style={{ background: T.ink, padding: "48px 32px", borderBottom: `1.5px solid ${T.ink}` }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 24 }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(17px,2vw,22px)", color: "rgba(255,255,255,.85)", lineHeight: 1.7, maxWidth: 680 }}>
+            Most websites look good. Very few actually convert.{" "}
+            <span style={{ color: T.red, fontWeight: 600 }}>If your site isn't generating customers, it's not doing its job.</span>
+          </p>
+          <InkBtn variant="white" onClick={() => setPage("contact")}>Fix My Site →</InkBtn>
+        </div>
+      </div>
+
       {/* WHY OBSESSIVE */}
       <div style={{ borderBottom: `1.5px solid ${T.ink}` }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "80px 32px" }}>
@@ -471,18 +484,18 @@ function HomePage({ setPage }) {
             <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", borderBottom: `1.5px solid ${T.ink}`, paddingBottom: 18, marginBottom: 56, flexWrap: "wrap", gap: 16 }}>
               <div>
                 <SectionLabel text="Why Obsessive Agency" />
-                <Display>Most sites look good.<br />Ours get you calls.</Display>
+                <Display>Most agencies sell you a website.<br />We sell you results.</Display>
               </div>
               <p style={{ fontSize: 15, color: T.mid, maxWidth: 420, lineHeight: 1.75, alignSelf: "flex-end" }}>
-                Traditional agencies charge $5,000+ upfront, take 6 weeks, and disappear after launch. We flip that model entirely — no contract, no deposit, and we only win when you do.
+                No 6-week timelines. No $5,000 deposits. No disappearing after launch. We're obsessive about one thing: making your site book you jobs.
               </p>
             </div>
           </Reveal>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", border: `1.5px solid ${T.ink}` }} className="svc-grid-3">
             {[
-              { icon: "◎", title: "$0 upfront. Ever.", body: "Your first payment is your first monthly fee — nothing more. No deposit, no setup cost, no surprises. vs. $3,000–$8,000 at a traditional agency." },
-              { icon: "↗", title: "Live in 48 hours.", body: "From kickoff call to live website in under 48 hours. While your competitors wait 6 weeks, you're already getting leads." },
-              { icon: "▲", title: "Designed to book jobs.", body: "Every site ships with lead capture forms, click-to-call, local SEO structure, and review prompts. Pretty is a bonus. Performance is the point." },
+              { icon: "◎", title: "$0 to start. $99/mo. Cancel anytime.", body: "No deposit. No setup fee. Your first payment is your first monthly bill — nothing more. Traditional agencies charge $3,000–$8,000 before they write a single line of code." },
+              { icon: "\u2197\uFE0E", title: "Live in 48 hours.", body: "From kickoff call to live, indexed website in under 48 hours. While competitors wait 6 weeks, you're already showing up in search and taking calls." },
+              { icon: "▲", title: "Built to convert, not just look good.", body: "Every site ships with click-to-call, lead capture forms, local SEO structure, and Google review prompts. Obsessive about performance — not just aesthetics." },
             ].map((c, i) => (
               <Reveal key={i} delay={i * 80}>
                 <div style={{ padding: "36px 32px", borderRight: i < 2 ? `1px solid ${T.ink}` : "none", background: T.white }}>
@@ -503,7 +516,7 @@ function HomePage({ setPage }) {
             <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", borderBottom: `1.5px solid ${T.ink}`, paddingBottom: 18, marginBottom: 48, flexWrap: "wrap", gap: 16 }}>
               <div>
                 <SectionLabel text="Featured Work" />
-                <Display>Real sites. Real results.</Display>
+                <Display>Real clients. Measurable results.</Display>
               </div>
               <InkBtn variant="outline" onClick={() => setPage("work")}>View all work →</InkBtn>
             </div>
@@ -512,9 +525,9 @@ function HomePage({ setPage }) {
             <div style={{ border: `1.5px solid ${T.ink}`, background: T.white, padding: "28px 32px", display: "flex", alignItems: "center", gap: 32, justifyContent: "space-between", flexWrap: "wrap" }}>
               <div>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: T.red, marginBottom: 6 }}>Cruz Air LLC — HVAC · Chicagoland</div>
-                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, color: T.ink, marginBottom: 8 }}>FROM ZERO TO BOOKED IN 24H</div>
+                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, color: T.ink, marginBottom: 8 }}>FROM NO WEBSITE TO BOOKED SOLID</div>
                 <p style={{ fontSize: 13, color: T.mid, maxWidth: 500 }}>
-                  Cruz Air had no web presence and was losing jobs to competitors. We shipped a full site — service pages, lead forms, local SEO — in under 48 hours. Lead inquiries up 38% in the first month.
+                  Cruz Air had no web presence and was losing jobs to competitors on Google. We built a full site — service pages, lead forms, local SEO — in 48 hours. Lead inquiries up 38% in month one.
                 </p>
               </div>
               <div style={{ display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center" }}>
@@ -534,13 +547,20 @@ function HomePage({ setPage }) {
       </div>
 
       {/* SOCIAL PROOF */}
-      <Reveal>
-        <div style={{ borderBottom: `1.5px solid ${T.ink}`, borderTop: `1.5px solid ${T.ink}` }}>
-          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "56px 32px", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 0 }} className="svc-grid-3">
-            {[
-              { quote: "Our phone started ringing within the first week. Wish we'd done this sooner.", name: "Mike R.", co: "Plumber, Chicago IL" },
-              { quote: "We went from no web presence to fully booked for two months. It basically paid for itself.", name: "Dana T.", co: "HVAC Owner, Naperville IL" },
-              { quote: "I was skeptical about the $99/mo model. Now I tell every contractor I know.", name: "Carlos M.", co: "General Contractor, Aurora IL" },
+      <div style={{ borderBottom: `1.5px solid ${T.ink}`, borderTop: `1.5px solid ${T.ink}` }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "56px 32px 0" }}>
+          <Reveal>
+            <div style={{ borderBottom: `1.5px solid ${T.ink}`, paddingBottom: 18, marginBottom: 0 }}>
+              <SectionLabel text="What clients say" />
+              <Display>Don't take our word for it.</Display>
+            </div>
+          </Reveal>
+        </div>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px 56px", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 0 }} className="svc-grid-3">
+          {[
+              { quote: "Phone started ringing in the first week. Wish I'd done this two years ago.", name: "Mike R.", co: "Plumbing contractor, Chicago IL" },
+              { quote: "We went from zero web presence to fully booked in 60 days. It paid for itself in week two.", name: "Dana T.", co: "HVAC owner, Naperville IL" },
+              { quote: "I was skeptical about $99/mo. Now I send every contractor I know to Obsessive Agency.", name: "Carlos M.", co: "General contractor, Aurora IL" },
             ].map((t, i) => (
               <Reveal key={i} delay={i * 80}>
                 <div style={{ padding: "36px 32px", borderRight: i < 2 ? `1px solid ${T.ink}` : "none" }}>
@@ -551,9 +571,8 @@ function HomePage({ setPage }) {
                 </div>
               </Reveal>
             ))}
-          </div>
         </div>
-      </Reveal>
+      </div>
 
       {/* CTA STRIP */}
       <div style={{ background: T.ink, padding: "72px 32px" }}>
@@ -563,7 +582,7 @@ function HomePage({ setPage }) {
               YOUR WEBSITE SHOULD BE<br />YOUR BEST<br /><span style={{ color: T.red }}>SALESPERSON.</span>
             </h2>
             <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: "rgba(255,255,255,.5)", maxWidth: 480, lineHeight: 1.75 }}>
-              If it's not booking you jobs while you sleep, it's not doing its job. Let's fix that — no deposit, no contract, no risk.
+              If your site isn't booking you jobs while you sleep, something is wrong. We'll fix it — no deposit, no contract, cancel anytime.
             </p>
           </div>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
