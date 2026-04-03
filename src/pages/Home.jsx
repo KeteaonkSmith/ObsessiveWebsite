@@ -157,7 +157,7 @@ export default function HomePage({ setPage }) {
             <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', paddingBottom: 18, marginBottom: 56, flexWrap: 'wrap', gap: 16, position: 'relative' }}>
               <div>
                 <SectionLabel text="How it works" />
-                <Display>Simple pricing.<br />Fast turnaround.<br />Real results.</Display>
+                <Display>Simple pricing.<br />Fast turnaround.<br /><span style={{ color: T.red }}>Real results.</span></Display>
               </div>
               <p style={{ fontSize: 15, color: T.mid, maxWidth: 400, lineHeight: 1.75, alignSelf: 'flex-end' }}>
                 Other agencies charge $5,000–$10,000 upfront, take 6–8 weeks, then hand you a site and disappear. We do the opposite.
@@ -201,7 +201,7 @@ export default function HomePage({ setPage }) {
             </div>
           </Reveal>
           <Reveal delay={100}>
-            <div style={{ border: `1.5px solid ${T.ink}`, background: T.white, padding: '28px 32px', display: 'flex', alignItems: 'center', gap: 32, justifyContent: 'space-between', flexWrap: 'wrap' }}>
+            <div style={{border: `1.5px solid ${T.ink}`, background: T.white, padding: '28px 32px', display: 'flex', alignItems: 'center', gap: 32, justifyContent: 'space-between', flexWrap: 'wrap' }}>
               <div>
                 <div style={{ fontFamily: "'Instrument Sans', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: '.12em', textTransform: 'uppercase', color: T.red, marginBottom: 6 }}>Cruz Air LLC — Live Site</div>
                 <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, color: T.ink, marginBottom: 8 }}>CRUZ AIR LLC</div>
